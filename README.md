@@ -12,11 +12,21 @@ Każde pytanie jest warte 1 punkt. Punkty przyznawane są tylko za dokładny zes
 
 ## E-mail i prywatność
 
-JavaScript generuje adres `mailto:rafal.edu@outlook.com` z zakodowanym tematem i treścią. Otwiera program pocztowy; uczeń musi sam nacisnąć Wyślij. Strona nie wysyła wiadomości w tle ani nie potwierdza doręczenia. Jeśli obsługa mailto nie jest skonfigurowana, można skopiować wynik do poczty internetowej. Kopiowanie ma awaryjne zaznaczanie tekstu w przypadku braku dostępu do schowka.
+Przycisk „Wyślij wynik nauczycielowi” wywołuje przez JavaScript HTTPS POST do `https://formsubmit.co/ajax/rafal.edu@outlook.com`. Usługa FormSubmit przekazuje zgłoszenie na pocztę nauczyciela. Uczeń nie potrzebuje konta e-mail ani programu pocztowego. Wysyłanie wymaga internetu.
 
-Nie umieszczaj haseł SMTP ani sekretów API w tym kodzie. Strona nie utrwala danych ucznia w cookies ani localStorage. Odświeżenie usuwa wynik. Hosting może prowadzić standardowe dzienniki ruchu. Poczta przetwarza wiadomość po wysłaniu przez użytkownika.
+Treść żądania zawiera dokładnie cztery pola: `Imię`, `Klasa`, `Procenty` i `Ocena`. Nie są wysyłane odpowiedzi, liczba punktów ani data. Usługa może dodać własną stopkę, nagłówki i metadane techniczne wiadomości. Kopiowanie wyniku pozostaje jako opcja awaryjna.
 
-Test ćwiczeniowy nie zapewnia odporności na oszustwa: publiczny kod zawiera klucz odpowiedzi, a wiadomość e-mail można edytować. Do ocenianego sprawdzianu nauczyciel powinien zweryfikować wynik na ekranie ucznia.
+### Jednorazowa aktywacja — nauczyciel
+
+Po pierwszym zgłoszeniu FormSubmit wysyła wiadomość aktywacyjną do rafal.edu@outlook.com. Odbiorca musi kliknąć link potwierdzający (sprawdź również Spam). Przed użyciem z klasą sprawdź odbiór wyniku próbnego. Do chwili aktywacji przyjęcie zgłoszenia nie oznacza dostarczenia wiadomości z wynikiem. Nie wpisuj haseł do poczty na stronie testu.
+
+Obsługiwane są: blokada wielokrotnego kliknięcia, odpowiedź błędu, limit oczekiwania 20 sekund i ręczne ponowienie. Przyjęcie przez usługę nie jest potwierdzeniem doręczenia. Przy błędzie sieci nie wiadomo, czy zgłoszenie dotarło; ponowienie może spowodować duplikat.
+
+Nie umieszczaj haseł SMTP ani sekretów API w tym kodzie. Strona nie utrwala danych ucznia w cookies ani localStorage. Odświeżenie usuwa wynik. FormSubmit przechowuje zgłoszenia przez 30 dni. Hosting, usługa i poczta mogą przetwarzać techniczne dane połączenia. Używaj rozwiązania zgodnie z zasadami szkoły dotyczącymi przetwarzania danych uczniów.
+
+Test ćwiczeniowy nie zapewnia odporności na oszustwa: publiczny kod zawiera klucz odpowiedzi i użytkownik może zmienić wysyłany wynik za pomocą narzędzi programistycznych. Do ocenianego sprawdzianu nauczyciel powinien zweryfikować wynik na ekranie ucznia.
+
+Dokumentacja usługi: https://formsubmit.co/ajax-documentation i https://formsubmit.co/help
 
 ## Publikacja w GitHub Pages
 

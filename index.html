@@ -37,10 +37,10 @@ Zbiórka, spacer przyrodniczy, odpoczynek i powrót do szkoły.</div><ol><li>Zap
 <section class="section" id="test" aria-labelledby="testTitle"><div class="section-head"><div><span class="section-num">02 / SPRAWDŹ SIĘ</span><h2 id="testTitle">Test wiedzy</h2></div><span class="tag">20 pytań · 20 punktów</span></div><div class="test-shell"><p class="test-intro">W każdym pytaniu wybierz wszystkie poprawne odpowiedzi. Pod pytaniem zobaczysz, czy należy zaznaczyć jedną, czy kilka odpowiedzi. <strong>1 punkt</strong> otrzymasz tylko za dokładnie cały poprawny zestaw; inny zestaw to <strong>0 punktów</strong>. Nie ma punktów ujemnych ani częściowych.</p><p class="small">Wypełnij wszystkie pytania. Po sprawdzeniu zobaczysz wynik, ocenę i wyjaśnienia. <a href="#oceny">Zobacz progi ocen przed rozpoczęciem.</a> Imię i klasa nie są automatycznie wysyłane ani zapisywane przez stronę.</p>
 <noscript>Test wymaga włączonej obsługi JavaScript. Ćwiczenia powyżej pozostają dostępne.</noscript>
 <form id="quiz" novalidate><fieldset class="identity"><legend class="eyebrow">Dane ucznia</legend><label for="studentName">Imię<input id="studentName" name="studentName" type="text" maxlength="60" required autocomplete="given-name" placeholder="np. Zosia"></label><label for="studentClass">Klasa<input id="studentClass" name="studentClass" type="text" maxlength="30" required autocomplete="off" placeholder="np. 6b"></label></fieldset><div id="progressWrap"><div class="progress-row"><span>Twoje odpowiedzi</span><span id="progressText" aria-live="polite">0 z 20 pytań</span></div><progress id="progress" max="20" value="0" aria-label="Liczba pytań z odpowiedzią"></progress></div><div id="questions"></div><p id="formError" class="error" role="alert" hidden></p><button id="submitQuiz" type="submit">Sprawdź wynik →</button></form>
-<section id="result" class="result" aria-labelledby="resultTitle" tabindex="-1" hidden><span class="eyebrow">Twój wynik</span><h3 id="resultTitle">Test zakończony</h3><p id="resultIdentity"></p><div class="result-stats"><div><strong id="points"></strong><span>punktów</span></div><div><strong id="percent"></strong><span>poprawnych odpowiedzi</span></div><div><strong id="grade"></strong><span>ocena</span></div></div><p id="encouragement"></p><p><strong>Przekaż wynik nauczycielowi</strong><br>Przycisk otworzy program pocztowy z wiadomością do <strong>rafal.edu@outlook.com</strong>. Sprawdź jej treść i samodzielnie naciśnij „Wyślij” w swojej poczcie. Ta strona nie wysyła e-maila automatycznie i nie potwierdza jego doręczenia.</p><div class="actions"><a id="emailResult" class="button" href="mailto:rafal.edu@outlook.com">Przygotuj e-mail z wynikiem</a><button id="copyResult" class="secondary" type="button">Kopiuj treść wyniku</button></div><p class="small" style="margin-top:12px">Jeśli nie masz skonfigurowanej poczty, skopiuj treść poniżej i wklej ją do nowej wiadomości w swojej poczcie internetowej.</p><label for="reportText">Treść wiadomości</label><textarea id="reportText" class="report" readonly></textarea><p id="copyStatus" class="small" role="status"></p><div class="actions"><button id="retry" type="button" class="secondary">Rozwiąż ponownie</button></div><p class="small" style="margin-top:10px">Ponowne rozwiązanie usunie obecne odpowiedzi i wynik z tej strony. Najpierw skopiuj wynik, jeśli chcesz go zachować.</p></section>
+<section id="result" class="result" aria-labelledby="resultTitle" tabindex="-1" hidden><span class="eyebrow">Twój wynik</span><h3 id="resultTitle">Test zakończony</h3><p id="resultIdentity"></p><div class="result-stats"><div><strong id="points"></strong><span>punktów</span></div><div><strong id="percent"></strong><span>poprawnych odpowiedzi</span></div><div><strong id="grade"></strong><span>ocena</span></div></div><p id="encouragement"></p><p><strong>Przekaż wynik nauczycielowi</strong><br>Kliknij przycisk poniżej. Nie potrzebujesz własnej poczty ani programu pocztowego. Do nauczyciela trafią tylko: <strong>imię, klasa, wynik procentowy i ocena</strong>.</p><p class="small">Wynik zostanie przekazany przez usługę FormSubmit na adres rafal.edu@outlook.com. FormSubmit przechowuje zgłoszenia przez 30 dni. <a href="https://formsubmit.co/privacy.pdf" target="_blank" rel="noopener noreferrer">Zasady prywatności usługi</a>.</p><label for="reportText">Dane do wysłania</label><textarea id="reportText" class="report" style="min-height:125px" readonly></textarea><div class="actions"><button id="sendResult" class="button" type="button">Wyślij wynik nauczycielowi</button><button id="copyResult" class="secondary" type="button">Kopiuj wynik</button></div><p id="sendStatus" class="small" role="status" aria-live="polite" style="margin-top:12px"></p><p id="copyStatus" class="small" role="status"></p><div class="actions"><button id="retry" type="button" class="secondary">Rozwiąż ponownie</button></div><p class="small" style="margin-top:10px">Ponowne rozwiązanie usunie obecny wynik z tej strony. Najpierw wyślij lub skopiuj wynik, jeśli chcesz go zachować.</p></section>
 </div></section>
 <section id="oceny" class="section" aria-labelledby="gradeTitle"><span class="section-num">03 / ZASADY</span><h2 id="gradeTitle">Wiesz, za co dostajesz ocenę</h2><p>Procent = zdobyte punkty ÷ 20 × 100%. Każda poprawna odpowiedź na całe pytanie to 5%. Ocena jest ustalana na podstawie dokładnego wyniku, bez zaokrąglania.</p><div class="grade-grid" id="gradeScale"></div><p class="small">Dolna granica każdego progu jest włączona, górna wyłączona; 100% należy do oceny 5. Przykład: 14/20 = 70% = 4−; 18/20 = 90% = 5−. To skala zaproponowana do tego testu, a nie ogólnopolska reguła oceniania.</p>
-<details class="teacher"><summary>Materiały i wskazówki dla nauczyciela</summary><p style="margin-top:14px">Propozycja pracy: pierwsza lekcja — sześć ćwiczeń; druga — omówienie dokumentów i test. Sprawdź w pracy praktycznej: zapis ODT/PDF, hierarchię stylów, wyrównanie, odstępy, automatyczne listy i tabelę. Ocena wyliczana na tej stronie dotyczy wyłącznie testu.</p><p>Test ma charakter ćwiczeniowy: odpowiedzi i zasady oceniania znajdują się w publicznym kodzie JavaScript. Uczeń może zmienić treść wiadomości e-mail; nie jest ona uwierzytelnionym potwierdzeniem wyniku. Przy sprawdzianie ocenianym zweryfikuj wynik na ekranie ucznia.</p><p>Strona nie używa analityki, plików cookie ani pamięci przeglądarki do przechowywania danych ucznia. Wynik znika po odświeżeniu. Po wysłaniu e-maila dane przetwarzane są przez używaną pocztę. Hosting może prowadzić standardowe dzienniki ruchu.</p><p>Materiały pomocnicze: <a href="https://help.libreoffice.org/latest/pl/text/swriter/guide/main.html">oficjalna pomoc LibreOffice Writer</a>, <a href="https://help.libreoffice.org/latest/pl/text/swriter/01/05130000.html">style</a>, <a href="https://help.libreoffice.org/latest/pl/text/shared/01/ref_pdf_export.html">eksport PDF</a>.</p></details></section>
+<details class="teacher"><summary>Materiały i wskazówki dla nauczyciela</summary><p style="margin-top:14px">Propozycja pracy: pierwsza lekcja — sześć ćwiczeń; druga — omówienie dokumentów i test. Sprawdź w pracy praktycznej: zapis ODT/PDF, hierarchię stylów, wyrównanie, odstępy, automatyczne listy i tabelę. Ocena wyliczana na tej stronie dotyczy wyłącznie testu.</p><p>Test ma charakter ćwiczeniowy: odpowiedzi i zasady oceniania znajdują się w publicznym kodzie JavaScript. Wynik oblicza przeglądarka i można go zmienić narzędziami programistycznymi; e-mail nie jest uwierzytelnionym potwierdzeniem wyniku. Przy sprawdzianie ocenianym zweryfikuj wynik na ekranie ucznia.</p><p>Strona nie używa analityki, plików cookie ani pamięci przeglądarki do przechowywania danych ucznia. Wynik znika po odświeżeniu. Dopiero kliknięcie „Wyślij wynik nauczycielowi” przekazuje imię, klasę, procenty i ocenę do FormSubmit, a następnie na adres rafal.edu@outlook.com. FormSubmit przechowuje zgłoszenia przez 30 dni. Usługa pośrednicząca, hosting i poczta mogą przetwarzać także techniczne dane połączenia. Strona nie wysyła odpowiedzi na pytania, liczby punktów ani daty testu.</p><p><strong>Jednorazowa aktywacja wysyłania:</strong> po pierwszym zgłoszeniu FormSubmit wyśle na rafal.edu@outlook.com wiadomość aktywacyjną. Nauczyciel musi kliknąć zawarty w niej link (warto sprawdzić folder Spam). Przed użyciem z klasą sprawdź odbiór próbnego wyniku. Komunikat o przyjęciu zgłoszenia przez usługę nie potwierdza doręczenia do skrzynki.</p><p>Materiały pomocnicze: <a href="https://help.libreoffice.org/latest/pl/text/swriter/guide/main.html">oficjalna pomoc LibreOffice Writer</a>, <a href="https://help.libreoffice.org/latest/pl/text/swriter/01/05130000.html">style</a>, <a href="https://help.libreoffice.org/latest/pl/text/shared/01/ref_pdf_export.html">eksport PDF</a>.</p></details></section>
 </main><footer><span>Pracownia Writer / Materiał do nauki informatyki</span><span>Ćwicz uważnie. Zapisuj regularnie.</span></footer>
 <script>
 'use strict';
@@ -73,6 +73,9 @@ function isCorrect(selected,correct){return selected.length===correct.length&&co
 function scoreAnswers(answers){return QUESTIONS.reduce((points,item,index)=>points+Number(isCorrect(answers[index]||[],item.correct)),0);}
 const $=id=>document.getElementById(id);
 let completed=false;
+let resultPayload=null;
+let sending=false;
+let sent=false;
 function render(){
  $('questions').innerHTML=QUESTIONS.map((item,i)=>`<fieldset class="question" id="q${i}"><legend>${i+1}. ${item.q}<small>${item.correct.length===1?'Zaznacz jedną odpowiedź.':'Zaznacz kilka odpowiedzi.'}</small></legend><div class="answers">${item.a.map((answer,j)=>`<label class="answer"><input type="${item.correct.length===1?'radio':'checkbox'}" name="q${i}" value="${j}"><span>${answer}</span></label>`).join('')}</div><div id="feedback${i}" class="feedback" hidden></div></fieldset>`).join('');
  $('gradeScale').innerHTML=SCALE.map((item,i)=>`<div class="grade"><strong>${item.grade}</strong><span>${item.min}${i<SCALE.length-1?'–&lt;'+SCALE[i+1].min:'–100'}%</span></div>`).join('');
@@ -81,7 +84,24 @@ function readAnswers(){return QUESTIONS.map((_,i)=>Array.from(document.querySele
 function updateProgress(){const count=readAnswers().filter(answer=>answer.length).length;$('progress').value=count;$('progressText').textContent=`${count} z ${QUESTIONS.length} pytań`;}
 function error(message,target){$('formError').textContent=message;$('formError').hidden=false;target.focus();}
 function cleanString(value){return value.trim().replace(/[\r\n\t]+/g,' ');}
-function buildReport(name,studentClass,points,percent,grade,date){return `Test: LibreOffice Writer (wersja 1.0)\nImię: ${name}\nKlasa: ${studentClass}\nPunkty: ${points}/${QUESTIONS.length}\nWynik: ${percent}%\nOcena: ${grade}\nData: ${date}\n\n1 punkt za cały poprawny zestaw odpowiedzi.\nWynik obliczony w przeglądarce; wiadomość przygotowana przez ucznia.`;}
+function buildPayload(name,studentClass,percent,grade){return {'Imię':name,'Klasa':studentClass,'Procenty':percent+'%','Ocena':grade};}
+function buildReport(payload){return Object.entries(payload).map(([key,value])=>key+': '+value).join('\n');}
+// FormSubmit zapewnia serwer wysyłający e-mail, ponieważ GitHub Pages jest statyczny.
+// W kodzie NIE ma haseł SMTP ani sekretów API. Pierwsze zgłoszenie wymaga
+// aktywacji adresu przez nauczyciela w wiadomości otrzymanej od FormSubmit.
+// Body zawiera wyłącznie 4 pola — bez odpowiedzi, punktów, daty czy danych przeglądarki.
+// Usługa może sama dodać nagłówki/stopkę wiadomości i przetwarza metadane połączenia.
+// Odpowiedź success potwierdza przyjęcie przez usługę, nie doręczenie e-maila.
+async function deliverResult(payload,signal){
+ const response=await fetch('https://formsubmit.co/ajax/rafal.edu@outlook.com',{
+  method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+  credentials:'omit',referrerPolicy:'no-referrer',body:JSON.stringify(payload),signal
+ });
+ if(!response.ok)throw new Error('HTTP '+response.status);
+ const data=await response.json();
+ if(data.success!==true&&data.success!=='true')throw new Error('Zgłoszenie nie zostało przyjęte.');
+ return data;
+}
 render();
 $('quiz').addEventListener('change',updateProgress);
 $('quiz').addEventListener('submit',event=>{
@@ -92,23 +112,34 @@ $('quiz').addEventListener('submit',event=>{
  const answers=readAnswers(),missing=answers.findIndex(answer=>!answer.length);
  if(missing!==-1)return error(`Pytanie ${missing+1} nie ma odpowiedzi. Uzupełnij wszystkie pytania.`,document.querySelector(`input[name="q${missing}"]`));
  $('formError').hidden=true;completed=true;
- const points=scoreAnswers(answers),percent=points/QUESTIONS.length*100,grade=gradeFor(percent),date=new Date().toLocaleString('pl-PL');
+ const points=scoreAnswers(answers),percent=points/QUESTIONS.length*100,grade=gradeFor(percent);
  $('points').textContent=`${points}/${QUESTIONS.length}`;$('percent').textContent=`${percent}%`;$('grade').textContent=grade;
  // Dane ucznia trafiają wyłącznie do textContent/value — nigdy do innerHTML.
  $('resultIdentity').textContent=`${name} · klasa ${studentClass}`;
  $('encouragement').textContent=percent>=90?'Świetna praca! Sprawdź jeszcze wyjaśnienia pod pytaniami.':percent>=50?'Masz już solidną podstawę. Wróć do pytań, które warto jeszcze przećwiczyć.':'To dobry moment na powtórkę. Wróć do ćwiczeń i przeczytaj wyjaśnienia pod pytaniami.';
  QUESTIONS.forEach((item,i)=>{const ok=isCorrect(answers[i],item.correct),feedback=$(`feedback${i}`);feedback.hidden=false;feedback.classList.toggle('wrong',!ok);feedback.textContent=`${ok?'1/1 pkt — poprawnie.':'0/1 pkt — poćwicz jeszcze.'} Poprawne: ${item.correct.map(j=>item.a[j]).join('; ')}. ${item.why}`;});
- const report=buildReport(name,studentClass,points,percent,grade,date);$('reportText').value=report;
- // BEZPIECZEŃSTWO: frontend JS nie powinien zawierać hasła SMTP ani sekretu API.
- // mailto tylko przygotowuje wiadomość w programie użytkownika. Użytkownik sam
- // zatwierdza wysłanie; strona nie ma możliwości sprawdzenia doręczenia.
- // encodeURIComponent koduje także znaki &, #, ? i polskie litery w danych ucznia.
- $('emailResult').href=`mailto:rafal.edu@outlook.com?subject=${encodeURIComponent('Wynik testu — LibreOffice Writer')}&body=${encodeURIComponent(report)}`;
+ resultPayload=Object.freeze(buildPayload(name,studentClass,percent,grade));
+ $('reportText').value=buildReport(resultPayload);
+ sent=false;$('sendResult').disabled=false;$('sendResult').textContent='Wyślij wynik nauczycielowi';$('sendStatus').textContent='';
  $('quiz').querySelectorAll('input').forEach(input=>input.disabled=true);$('submitQuiz').hidden=true;
  $('result').hidden=false;$('result').focus();$('result').scrollIntoView({behavior:'smooth',block:'start'});
 });
-$('copyResult').addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('reportText').value);$('copyStatus').textContent='Skopiowano treść. Wklej ją do wiadomości do nauczyciela.';}catch{ $('reportText').focus();$('reportText').select();$('copyStatus').textContent='Zaznaczono treść. Użyj polecenia Kopiuj (Ctrl+C lub ⌘C), a następnie wklej ją do wiadomości.'; }});
-$('retry').addEventListener('click',()=>{completed=false;$('quiz').reset();$('quiz').querySelectorAll('input').forEach(input=>input.disabled=false);document.querySelectorAll('.feedback').forEach(el=>el.hidden=true);$('result').hidden=true;$('formError').hidden=true;$('submitQuiz').hidden=false;$('reportText').value='';$('emailResult').href='mailto:rafal.edu@outlook.com';$('copyStatus').textContent='';updateProgress();$('studentName').focus();});
+$('copyResult').addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('reportText').value);$('copyStatus').textContent='Skopiowano wynik.';}catch{ $('reportText').focus();$('reportText').select();$('copyStatus').textContent='Zaznaczono wynik. Użyj polecenia Kopiuj (Ctrl+C lub ⌘C).'; }});
+$('retry').addEventListener('click',()=>{if(sending)return;completed=false;resultPayload=null;sent=false;$('quiz').reset();$('quiz').querySelectorAll('input').forEach(input=>input.disabled=false);document.querySelectorAll('.feedback').forEach(el=>el.hidden=true);$('result').hidden=true;$('formError').hidden=true;$('submitQuiz').hidden=false;$('reportText').value='';$('sendStatus').textContent='';$('sendResult').disabled=false;$('sendResult').textContent='Wyślij wynik nauczycielowi';$('copyStatus').textContent='';updateProgress();$('studentName').focus();});
+$('sendResult').addEventListener('click',async()=>{
+ if(!completed||!resultPayload||sending||sent)return;
+ sending=true;$('sendResult').disabled=true;$('retry').disabled=true;
+ $('sendResult').textContent='Wysyłanie…';$('sendStatus').textContent='Przekazywanie wyniku. Pozostań na stronie.';
+ const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),20000);
+ try{
+  await deliverResult(resultPayload,controller.signal);
+  sent=true;$('sendResult').textContent='Wynik przekazany';
+  $('sendStatus').textContent='Usługa przyjęła wynik do przekazania nauczycielowi. Nie musisz nic więcej robić. Doręczenie zależy od aktywacji adresu przez nauczyciela i działania poczty.';
+ }catch{
+  $('sendResult').textContent='Spróbuj wysłać ponownie';
+  $('sendStatus').textContent='Nie udało się potwierdzić przyjęcia wyniku. Sprawdź połączenie i spróbuj ponownie lub pokaż wynik nauczycielowi. Jeśli poprzednie zgłoszenie dotarło, ponowienie może utworzyć duplikat.';
+ }finally{clearTimeout(timeout);sending=false;$('sendResult').disabled=sent;$('retry').disabled=false;}
+});
 </script>
 </body>
 </html>
