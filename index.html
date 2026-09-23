@@ -95,7 +95,7 @@ function buildReport(payload){return Object.entries(payload).map(([key,value])=>
 async function deliverResult(payload,signal){
  const response=await fetch('https://formsubmit.co/ajax/rafal.edu@outlook.com',{
   method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
-  credentials:'omit',referrerPolicy:'no-referrer',body:JSON.stringify(payload),signal
+  credentials:'omit',referrerPolicy:'strict-origin-when-cross-origin',body:JSON.stringify(payload),signal
  });
  if(!response.ok)throw new Error('HTTP '+response.status);
  const data=await response.json();
