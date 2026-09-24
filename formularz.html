@@ -25,7 +25,7 @@
 <h2 id="form-title">Prześlij plik</h2>
 <p class="sub">Wszystkie trzy pola są wymagane.</p>
 <form id="work-form" action="https://formsubmit.co/rafal.edu@outlook.com" method="POST" enctype="multipart/form-data">
-<input type="hidden" name="_subject" value="Praca ucznia — plik">
+<input type="hidden" id="mail-subject" name="_subject" value="Praca ucznia — plik">
 <input type="hidden" name="_template" value="table">
 <input type="text" name="_honey" tabindex="-1" autocomplete="off" hidden aria-hidden="true">
 <fieldset id="fields">
@@ -43,11 +43,12 @@
 <p class="hint" id="file-hint">Jeden plik, maks. 10 MB. Możesz dołączyć np. ODT, DOCX, PDF lub ZIP.</p>
 <button class="submit" id="send" type="submit">Wyślij pracę</button>
 </fieldset>
+<p class="hint">Po kliknięciu przejdziesz do FormSubmit. Jeśli pojawi się weryfikacja, wykonaj ją i poczekaj na potwierdzenie wysłania.</p>
 <p class="privacy">Twoje dane i plik trafią do nauczyciela przez usługę <a href="https://formsubmit.co/privacy.pdf" target="_blank" rel="noopener">FormSubmit</a>. Nie potrzebujesz konta ani programu pocztowego.</p>
 <noscript><p>Bez JavaScript wybierz plik kliknięciem. Po wysłaniu przejdziesz do strony FormSubmit. Plik nie może przekraczać 10 MB.</p></noscript>
 </form>
 <div id="status" class="status" role="status" aria-live="polite" tabindex="-1" hidden></div>
-<button id="again" type="button" class="submit again" hidden>Prześlij kolejną pracę</button>
+
 </section>
 </main>
 <footer>Zachowaj kopię pliku na swoim urządzeniu do czasu sprawdzenia pracy przez nauczyciela.</footer>
@@ -62,9 +63,9 @@ const drop=document.getElementById('drop');
 const info=document.getElementById('file-info');
 const statusBox=document.getElementById('status');
 const send=document.getElementById('send');
-const again=document.getElementById('again');
+const subject=document.getElementById('mail-subject');
 const MAX_SIZE=10000000;
-let busy=false,complete=false,dragDepth=0;
+let busy=false,dragDepth=0,recoveryTimer;
 function showStatus(message,kind){statusBox.textContent=message;statusBox.className='status '+kind;statusBox.hidden=false;}
 function clearStatus(){statusBox.hidden=true;statusBox.textContent='';}
 function validateFile(file){if(!file)return 'Dołącz plik z pracą.';if(file.size===0)return 'Ten plik jest pusty. Wybierz zapisaną pracę.';if(file.size>MAX_SIZE)return 'Plik jest za duży. Maksymalny rozmiar to 10 MB. Zmniejsz plik lub spakuj go do ZIP.';return '';}
@@ -72,34 +73,31 @@ function refreshFile(){const file=input.files[0];const error=validateFile(file);
 input.addEventListener('change',()=>{if(input.files.length)refreshFile();else info.hidden=true;});
 document.getElementById('remove').addEventListener('click',()=>{input.value='';info.hidden=true;clearStatus();input.focus();});
 for(const type of ['dragenter','dragover','dragleave','drop']){document.addEventListener(type,event=>{if(Array.from(event.dataTransfer?.types||[]).includes('Files'))event.preventDefault();});}
-drop.addEventListener('dragenter',event=>{event.preventDefault();if(!busy&&!complete){dragDepth++;drop.classList.add('over');}});
-drop.addEventListener('dragover',event=>{event.preventDefault();if(event.dataTransfer)event.dataTransfer.dropEffect=busy||complete?'none':'copy';});
+drop.addEventListener('dragenter',event=>{event.preventDefault();if(!busy){dragDepth++;drop.classList.add('over');}});
+drop.addEventListener('dragover',event=>{event.preventDefault();if(event.dataTransfer)event.dataTransfer.dropEffect=busy?'none':'copy';});
 drop.addEventListener('dragleave',()=>{dragDepth=Math.max(0,dragDepth-1);if(!dragDepth)drop.classList.remove('over');});
-drop.addEventListener('drop',event=>{event.preventDefault();dragDepth=0;drop.classList.remove('over');if(busy||complete)return;const files=event.dataTransfer.files;if(files.length!==1){showStatus('Dodaj dokładnie jeden plik. Kilka plików możesz połączyć w archiwum ZIP.','error');return;}const error=validateFile(files[0]);if(error){showStatus(error,'error');return;}try{input.files=files;refreshFile();}catch{showStatus('Przeciąganie nie działa w tej przeglądarce. Kliknij pole i wybierz plik.','error');}});
+drop.addEventListener('drop',event=>{event.preventDefault();dragDepth=0;drop.classList.remove('over');if(busy)return;const files=event.dataTransfer.files;if(files.length!==1){showStatus('Dodaj dokładnie jeden plik. Kilka plików możesz połączyć w archiwum ZIP.','error');return;}const error=validateFile(files[0]);if(error){showStatus(error,'error');return;}try{input.files=files;refreshFile();}catch{showStatus('Przeciąganie nie działa w tej przeglądarce. Kliknij pole i wybierz plik.','error');}});
 for(const field of [student,schoolClass]){field.addEventListener('input',()=>field.setCustomValidity(''));field.addEventListener('change',()=>{field.value=field.value.trim();field.setCustomValidity(field.value?'':'Uzupełnij to pole.');});}
-form.addEventListener('submit',async event=>{
- event.preventDefault();if(busy||complete)return;
+// Załączniki wysyłamy przez standardowy endpoint FormSubmit, nie /ajax/.
+// Nie wyłączaj fieldset ani inputów: disabled wyklucza ich dane z natywnego POST.
+form.addEventListener('submit',event=>{
+ if(busy){event.preventDefault();return;}
  for(const field of [student,schoolClass]){field.value=field.value.trim();field.setCustomValidity(field.value?'':'Uzupełnij to pole.');}
- if(!form.reportValidity())return;
- const file=input.files[0];const error=validateFile(file);if(error){showStatus(error,'error');return;}
- if(location.protocol==='file:'){showStatus('Otwórz formularz pod opublikowanym adresem HTTPS, aby wysłać pracę.','error');return;}
- if(!navigator.onLine){showStatus('Brak połączenia z internetem. Połącz się z siecią i spróbuj ponownie. Plik pozostaje wybrany.','error');return;}
- const data=new FormData(form);
- data.set('_subject','Praca ucznia — '+schoolClass.value+' — '+student.value);
- const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),120000);
- busy=true;fields.disabled=true;form.setAttribute('aria-busy','true');send.textContent='Wysyłanie…';showStatus('Przesyłanie pliku. Pozostaw tę stronę otwartą.','busy');
- try{
-  // FormData zachowuje plik jako binarny załącznik. Przeglądarka ustawia multipart boundary.
-  const response=await fetch('https://formsubmit.co/ajax/rafal.edu@outlook.com',{method:'POST',body:data,headers:{Accept:'application/json'},referrerPolicy:'strict-origin-when-cross-origin',signal:controller.signal});
-  const result=await response.json();
-  if(!response.ok||!(result.success===true||result.success==='true')){
-   if(/activat/i.test(String(result.message||''))){showStatus('Wysyłka wymaga aktywacji przez nauczyciela. Na rafal.edu@outlook.com powinien dotrzeć e-mail z linkiem „Activate Form”. Po aktywacji wyślij plik ponownie.','error');}else{showStatus('Usługa nie potwierdziła przyjęcia pracy. Spróbuj później lub zgłoś problem nauczycielowi. Dane i plik pozostają w formularzu.','error');}
-  }else{complete=true;showStatus('Praca została przyjęta przez usługę do wysłania na rafal.edu@outlook.com. Załącznik: '+file.name+'. To potwierdzenie przyjęcia, a nie odczytania wiadomości przez nauczyciela.','success');again.hidden=false;send.textContent='Praca przekazana';statusBox.focus();}
- }catch{showStatus('Nie udało się potwierdzić wysyłki. Sprawdź internet i zapytaj nauczyciela, czy praca dotarła. Ponowna próba może wysłać duplikat. Dane i plik pozostają w formularzu.','error');}
- finally{clearTimeout(timer);busy=false;fields.disabled=complete;form.removeAttribute('aria-busy');if(!complete)send.textContent='Spróbuj wysłać ponownie';}
+ if(!form.reportValidity()){event.preventDefault();return;}
+ const error=validateFile(input.files[0]);
+ if(error){event.preventDefault();showStatus(error,'error');return;}
+ if(location.protocol==='file:'){event.preventDefault();showStatus('Otwórz formularz pod opublikowanym adresem HTTPS, aby wysłać pracę.','error');return;}
+ if(!navigator.onLine){event.preventDefault();showStatus('Brak połączenia z internetem. Połącz się z siecią i spróbuj ponownie. Plik pozostaje wybrany.','error');return;}
+ subject.value='Praca ucznia — '+schoolClass.value+' — '+student.value;
+ busy=true;send.disabled=true;send.textContent='Przekazywanie pliku…';
+ form.setAttribute('aria-busy','true');
+ showStatus('Przechodzenie do FormSubmit. Dokończ ewentualną weryfikację i poczekaj na potwierdzenie na stronie usługi.','busy');
+ // Brak preventDefault: przeglądarka wysyła prawdziwy plik jako multipart/form-data.
+ recoveryTimer=setTimeout(()=>{resetSending();showStatus('Nie otrzymano potwierdzenia przejścia do usługi. Sprawdź połączenie i skrzynkę nauczyciela przed ponowną próbą, aby uniknąć duplikatu.','error');},120000);
 });
-again.addEventListener('click',()=>{form.reset();complete=false;fields.disabled=false;info.hidden=true;again.hidden=true;clearStatus();send.textContent='Wyślij pracę';student.focus();});
-window.addEventListener('beforeunload',event=>{if(busy){event.preventDefault();event.returnValue='';}});
+function resetSending(){clearTimeout(recoveryTimer);busy=false;send.disabled=false;send.textContent='Wyślij pracę';form.removeAttribute('aria-busy');}
+window.addEventListener('pagehide',()=>clearTimeout(recoveryTimer));
+window.addEventListener('pageshow',()=>{resetSending();clearStatus();if(input.files.length)refreshFile();else info.hidden=true;});
 </script>
 </body>
 </html>
