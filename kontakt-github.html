@@ -13,6 +13,7 @@
 <section class="card" aria-labelledby="form-heading"><h2 id="form-heading">Twoja wiadomość</h2><p class="intro">Pola oznaczone * są wymagane.</p>
 <form id="contact-form" action="" method="post" enctype="multipart/form-data" target="_blank" rel="noopener">
 <input type="hidden" name="_subject" value="Wiadomość z formularza kontaktowego"><input type="hidden" name="_template" value="table">
+<input type="hidden" name="_url" value="https://alpka23.github.io/pracownia-writer/kontakt-github.html">
 <div hidden aria-hidden="true"><label>Nie wypełniaj<input name="_honey" tabindex="-1" autocomplete="off"></label></div>
 <div class="row"><div><label class="field" for="first">Imię *</label><input id="first" name="Imię" type="text" autocomplete="given-name" maxlength="80" required></div><div><label class="field" for="last">Nazwisko (opcjonalnie)</label><input id="last" name="Nazwisko" type="text" autocomplete="family-name" maxlength="100"></div></div>
 <div class="row"><div><label class="field" for="class">Klasa *</label><input id="class" name="Klasa" type="text" maxlength="30" placeholder="np. 7A" required></div><div><label class="field" for="school">Szkoła *</label><select id="school" name="Szkoła" required><option value="" disabled selected>Wybierz szkołę</option><option>SP-ZNP</option><option>SP-G</option><option>LO-G</option></select></div></div>
@@ -49,7 +50,7 @@ drop.addEventListener('dragleave',()=>{dragDepth=Math.max(0,dragDepth-1);if(!dra
 drop.addEventListener('drop',e=>{e.preventDefault();dragDepth=0;drop.classList.remove('over');if(busy)return;const files=e.dataTransfer.files;input.value='';info.hidden=true;if(files.length!==1){status('Dodaj jeden plik. Kilka dokumentów połącz w ZIP.');return;}const error=fileError(files[0]);if(error){status(error);return;}try{input.files=files;refreshFile();}catch{status('Wybierz plik kliknięciem — przeciąganie jest niedostępne w tej przeglądarce.');}});
 fields.forEach(field=>field.addEventListener('input',()=>field.setCustomValidity('')));
 // Pusty opcjonalny e-mail nie powinien trafiać do walidatora Reply-To usługi.
-form.addEventListener('formdata',e=>{for(const field of fields){if(!field.required&&!field.value.trim())e.formData.delete(field.name);}});
+form.addEventListener('formdata',e=>{for(const field of fields){if(!field.required&&!field.value.trim())e.formData.delete(field.name);}if(!input.files.length)e.formData.delete('attachment');});
 form.addEventListener('submit',e=>{
  if(busy){e.preventDefault();return;}
  if(!configured){e.preventDefault();status('Wysyłka nie została jeszcze uruchomiona.');return;}
