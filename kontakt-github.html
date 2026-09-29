@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Formularz kontaktowy z załącznikiem</title>
+<meta name="description" content="Wyślij wiadomość i załącz plik do 10 MB.">
+<style>
+:root{color-scheme:dark;font-family:Arial,Helvetica,sans-serif;background:#0a1628;color:#fff;line-height:1.6}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 90% 5%,#103348 0,transparent 55%)}header{max-width:1100px;margin:auto;padding:30px 24px;border-bottom:1px solid #20435a;display:flex;gap:14px;align-items:center}.logo{width:42px;height:42px;border:1px solid #f4a261;border-radius:50%;display:grid;place-items:center;color:#f4a261;font-size:24px}.brand{letter-spacing:.12em;font-weight:700}header small{display:block;color:#a8c0cc;letter-spacing:normal;font-weight:400}main{max-width:1050px;margin:56px auto;padding:0 24px;display:grid;grid-template-columns:.85fr 1.15fr;gap:55px;align-items:start}.eyebrow{font-size:12px;letter-spacing:.16em;color:#00b4d8;font-weight:700}h1{font-size:clamp(2.5rem,5vw,4rem);line-height:1.1;letter-spacing:-.03em}h1 span{color:#00b4d8}h2{margin:0;font-size:24px}p{color:#a8c0cc}.facts{display:grid;gap:18px;margin-top:36px}.fact{border-left:2px solid #f4a261;padding-left:18px}.fact b{display:block}.fact small{color:#a8c0cc}.card{background:#112240;border:1px solid #264458;border-radius:20px;padding:30px;box-shadow:0 20px 60px #0003}.intro{margin-top:6px;font-size:14px}label.field{display:block;font-size:14px;font-weight:700;margin:18px 0 6px}input,textarea,button{font:inherit}input[type=text],input[type=email],textarea{display:block;width:100%;background:#0a1628;color:white;border:1px solid #426078;border-radius:8px;padding:12px;min-height:48px}textarea{min-height:130px;resize:vertical}input::placeholder,textarea::placeholder{color:#93a7b7}input:focus-visible,textarea:focus-visible,button:focus-visible,a:focus-visible,.drop:focus-within{outline:3px solid #00b4d8;outline-offset:3px}.row{display:grid;grid-template-columns:1fr 1fr;gap:16px}.drop{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:150px;border:2px dashed #426078;border-radius:12px;background:#0c1c31;text-align:center;padding:20px;cursor:pointer}.drop.over,.drop:hover{border-color:#00b4d8;background:#123047}.drop input{position:absolute;inset:0;opacity:0;width:100%;height:100%;cursor:pointer}.drop span{font-size:26px;color:#00b4d8}.drop small{color:#a8c0cc}.hint,.privacy{font-size:12px;color:#a8c0cc}.file{display:flex;gap:10px;align-items:center;background:#193753;border-radius:8px;padding:12px;margin-top:12px}.file div{min-width:0;flex:1}.file b{display:block;overflow-wrap:anywhere}.file small{color:#a8c0cc}button{cursor:pointer}.remove{background:none;border:0;color:#73deef;padding:8px}.submit{width:100%;margin-top:20px;border:0;border-radius:8px;background:#00b4d8;color:#061727;padding:15px;font-weight:700}.submit:hover{background:#39c7e3}.submit:disabled{opacity:.6;cursor:wait}a{color:#73deef}.status{margin-top:16px;border-radius:8px;padding:14px;overflow-wrap:anywhere}.error{background:#4b2030;color:#ffe3e7}.busy{background:#173b52;color:#c8f6ff}footer{max-width:1050px;margin:auto;padding:0 24px 30px;font-size:12px;color:#a8c0cc}[hidden]{display:none!important}@media(max-width:740px){main{grid-template-columns:1fr;gap:28px;margin:24px auto}.facts{display:none}h1{margin:18px 0}.card{padding:22px}.row{grid-template-columns:1fr;gap:0}}
+</style></head>
+<body><header><span class="logo" aria-hidden="true">◎</span><div class="brand">KONTAKT<small>Wiadomość i załącznik</small></div></header>
+<main><section><div class="eyebrow">POROZMAWIAJMY</div><h1>Napisz do <span>nas.</span></h1><p>Przekaż wiadomość i dołącz plik. Wypełnij formularz — nie potrzebujesz programu pocztowego.</p><div class="facts"><div class="fact"><b>Do 10 MB</b><small>Jeden załącznik, np. PDF, ODT, DOCX lub ZIP.</small></div><div class="fact"><b>Przeciągnij i upuść</b><small>Możesz też wybrać plik z urządzenia.</small></div><div class="fact"><b>Zachowaj kopię</b><small>Nie usuwaj oryginału, zanim odbiorca potwierdzi otrzymanie.</small></div></div></section>
+<section class="card" aria-labelledby="form-heading"><h2 id="form-heading">Twoja wiadomość</h2><p class="intro">Pola oznaczone * są wymagane.</p>
+<form id="contact-form" action="" method="post" enctype="multipart/form-data">
+<input type="hidden" name="_subject" value="Wiadomość z formularza kontaktowego"><input type="hidden" name="_template" value="table">
+<div hidden aria-hidden="true"><label>Nie wypełniaj<input name="_honey" tabindex="-1" autocomplete="off"></label></div>
+<div class="row"><div><label class="field" for="first">Imię *</label><input id="first" name="Imię" type="text" autocomplete="given-name" maxlength="80" required></div><div><label class="field" for="last">Nazwisko *</label><input id="last" name="Nazwisko" type="text" autocomplete="family-name" maxlength="100" required></div></div>
+<label class="field" for="email">Twój adres e-mail *</label><input id="email" name="email" type="email" autocomplete="email" maxlength="254" required>
+<label class="field" for="message">Wiadomość *</label><textarea id="message" name="Wiadomość" maxlength="10000" required placeholder="Wpisz treść wiadomości…"></textarea>
+<label class="field" for="attachment">Załącznik (opcjonalnie)</label><label class="drop" id="drop" for="attachment"><span aria-hidden="true">↑</span><strong>Przeciągnij i upuść plik</strong><small>lub kliknij, aby go wybrać</small><input id="attachment" name="attachment" type="file" aria-describedby="file-hint"></label>
+<div id="file-info" class="file" hidden><div><b id="file-name"></b><small id="file-size"></small></div><button id="remove" type="button" class="remove">Usuń</button></div>
+<p class="hint" id="file-hint">Maks. 10 MB (10 000 000 bajtów). Kilka dokumentów połącz w jeden plik ZIP.</p>
+<button id="send" class="submit" type="submit" disabled>Wyślij wiadomość →</button>
+<p class="privacy">Wysyłkę obsługuje <a href="https://formsubmit.co/privacy.pdf" target="_blank" rel="noopener">FormSubmit</a>. Po wysłaniu poczekaj na potwierdzenie usługi. Może pojawić się weryfikacja antyspamowa.</p>
+<noscript><p>Włącz JavaScript, aby sprawdzić rozmiar załącznika i wysłać formularz.</p></noscript></form>
+<div id="status" class="status" role="status" aria-live="polite" tabindex="-1" hidden></div></section></main>
+<footer>Załącznik jest przekazywany do usługi wysyłkowej; nie jest publikowany w repozytorium GitHub.</footer>
+<script>
+'use strict';
+// Publiczny identyfikator FormSubmit. Nie wpisuj tutaj adresu odbiorcy ani sekretów.
+const ENDPOINT='https://formsubmit.co/d16c41ade2126d9268e5b1e1f620d782';
+const MAX_SIZE=10000000;
+const form=document.getElementById('contact-form'),input=document.getElementById('attachment'),drop=document.getElementById('drop'),info=document.getElementById('file-info'),statusBox=document.getElementById('status'),send=document.getElementById('send');
+const fields=['first','last','email','message'].map(id=>document.getElementById(id));
+let busy=false,dragDepth=0,timer;
+const configured=/^https:\/\/formsubmit\.co\/[a-zA-Z0-9_-]{8,128}$/.test(ENDPOINT);
+if(configured){form.action=ENDPOINT;send.disabled=false;}
+function status(message,kind='error'){statusBox.textContent=message;statusBox.className='status '+kind;statusBox.hidden=false;}
+function clearStatus(){statusBox.hidden=true;statusBox.textContent='';}
+function fileError(file){if(!file)return '';if(file.size===0)return 'Plik jest pusty. Wybierz zapisany dokument.';if(file.size>MAX_SIZE)return 'Plik jest za duży. Limit to 10 MB (10 000 000 bajtów). Zmniejsz plik lub spakuj go do ZIP.';return '';}
+function refreshFile(){const file=input.files[0];if(!file){info.hidden=true;return;}const error=fileError(file);if(error){input.value='';info.hidden=true;status(error);return;}document.getElementById('file-name').textContent=file.name;document.getElementById('file-size').textContent=file.size.toLocaleString('pl-PL')+' bajtów';info.hidden=false;clearStatus();}
+input.addEventListener('change',refreshFile);
+document.getElementById('remove').addEventListener('click',()=>{input.value='';info.hidden=true;clearStatus();input.focus();});
+for(const type of ['dragenter','dragover','dragleave','drop'])document.addEventListener(type,e=>{if(Array.from(e.dataTransfer?.types||[]).includes('Files'))e.preventDefault();});
+drop.addEventListener('dragenter',e=>{e.preventDefault();if(!busy){dragDepth++;drop.classList.add('over');}});
+drop.addEventListener('dragover',e=>{e.preventDefault();if(e.dataTransfer)e.dataTransfer.dropEffect=busy?'none':'copy';});
+drop.addEventListener('dragleave',()=>{dragDepth=Math.max(0,dragDepth-1);if(!dragDepth)drop.classList.remove('over');});
+drop.addEventListener('drop',e=>{e.preventDefault();dragDepth=0;drop.classList.remove('over');if(busy)return;const files=e.dataTransfer.files;input.value='';info.hidden=true;if(files.length!==1){status('Dodaj jeden plik. Kilka dokumentów połącz w ZIP.');return;}const error=fileError(files[0]);if(error){status(error);return;}try{input.files=files;refreshFile();}catch{status('Wybierz plik kliknięciem — przeciąganie jest niedostępne w tej przeglądarce.');}});
+fields.forEach(field=>field.addEventListener('input',()=>field.setCustomValidity('')));
+form.addEventListener('submit',e=>{
+ if(busy){e.preventDefault();return;}
+ if(!configured){e.preventDefault();status('Wysyłka nie została jeszcze uruchomiona.');return;}
+ fields.forEach(field=>{field.value=field.value.trim();field.setCustomValidity(field.value?'':'Uzupełnij to pole.');});
+ if(!form.reportValidity()){e.preventDefault();return;}
+ const error=fileError(input.files[0]);if(error){e.preventDefault();status(error);return;}
+ if(!navigator.onLine||location.protocol==='file:'){e.preventDefault();status('Otwórz opublikowaną stronę HTTPS i sprawdź połączenie z internetem.');return;}
+ busy=true;send.disabled=true;form.setAttribute('aria-busy','true');send.textContent='Przekazywanie wiadomości…';status('Przechodzenie do FormSubmit. Poczekaj na potwierdzenie usługi.','busy');
+ // Natywny POST multipart przesyła plik. Nie wyłączaj pól formularza.
+ timer=setTimeout(()=>{reset();status('Nie otrzymano potwierdzenia. Sprawdź połączenie i odbiór wiadomości przed ponowieniem wysyłki.');},120000);
+});
+function reset(){clearTimeout(timer);busy=false;send.disabled=!configured;send.textContent='Wyślij wiadomość →';form.removeAttribute('aria-busy');}
+window.addEventListener('pagehide',()=>clearTimeout(timer));
+window.addEventListener('pageshow',()=>{reset();clearStatus();refreshFile();if(!configured)status('Formularz czeka na uruchomienie wysyłki.');});
+</script></body></html>
